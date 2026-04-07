@@ -2,10 +2,10 @@ name = "overnit-landing"
 main = "worker/index.ts"
 compatibility_date = "2026-04-06"
 
-[assets]
-directory = "dist"
-
 routes = [
   { pattern = "overnit.com", custom_domain = true },
   { pattern = "www.overnit.com", custom_domain = true }
 ]
+
+[assets]
+directory = "dist"
