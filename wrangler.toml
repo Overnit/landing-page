@@ -3,8 +3,8 @@ main = "worker/index.ts"
 compatibility_date = "2026-04-06"
 
 routes = [
-  { pattern = "overnit.com", custom_domain = true },
-  { pattern = "www.overnit.com", custom_domain = true }
+  { pattern = "overnit.com", custom_domain = true, override_existing_dns_record = true },
+  { pattern = "www.overnit.com", custom_domain = true, override_existing_dns_record = true }
 ]
 
 [assets]
