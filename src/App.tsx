@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useLang } from "./LangContext";
+import { LangSwitcher } from "./LangSwitcher";
 import "./App.css";
 
 function App() {
+  const { t } = useLang();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -15,89 +18,94 @@ function App() {
     <div className="page">
       <nav className="nav">
         <div className="nav-brand">Overnit</div>
-        <div className="nav-links">
-          <a href="#features">Features</a>
-          <a href="#tools">Tools</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+        <div className="nav-right">
+          <div className="nav-links">
+            <a href="#features">{t.nav.features}</a>
+            <a href="#tools">{t.nav.tools}</a>
+            <a href="#about">{t.nav.about}</a>
+            <a href="#contact">{t.nav.contact}</a>
+          </div>
+          <LangSwitcher />
         </div>
       </nav>
 
       <header className="hero">
         <h1>
-          Build <span className="gradient-text">Infrastructure</span> That Scales
+          {t.hero.title1}<span className="gradient-text">{t.hero.titleHighlight}</span>{t.hero.title2}
         </h1>
-        <p className="hero-subtitle">
-          Cloud-native solutions for modern teams. Deploy, manage, and scale
-          your infrastructure with confidence.
-        </p>
+        <p className="hero-subtitle">{t.hero.subtitle}</p>
         <div className="hero-actions">
-          <a href="#contact" className="btn btn-primary">Get Started</a>
-          <a href="#features" className="btn btn-secondary">Learn More</a>
+          <a href="#contact" className="btn btn-primary">{t.hero.cta}</a>
+          <a href="#features" className="btn btn-secondary">{t.hero.secondary}</a>
         </div>
       </header>
 
-      <section id="features" className="features">
-        <h2>Why Overnit?</h2>
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">⚡</div>
-            <h3>Lightning Fast</h3>
-            <p>Deploy infrastructure in minutes, not hours. Automated pipelines that just work.</p>
+      <section id="tools" className="tools-hero">
+        <div className="tools-hero-content">
+          <div className="tools-hero-text">
+            <span className="tools-badge">{t.tools.qr.badge} ✨</span>
+            <h2>{t.tools.qr.title}</h2>
+            <p>{t.tools.qr.desc}</p>
+            <a href="/qr" className="btn btn-primary btn-lg">{t.hero.cta} →</a>
           </div>
-          <div className="feature-card">
-            <div className="feature-icon">🔒</div>
-            <h3>Secure by Default</h3>
-            <p>Zero-trust architecture with end-to-end encryption and automated compliance.</p>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">📈</div>
-            <h3>Auto Scaling</h3>
-            <p>Kubernetes-native workloads that scale seamlessly with your demand.</p>
+          <div className="tools-hero-visual">
+            <div className="qr-demo-card">
+              <div className="qr-demo-grid">
+                {Array.from({ length: 49 }, (_, i) => (
+                  <div key={i} className={`qr-cell ${[0,1,2,5,6,7,8,14,16,20,21,22,24,26,28,30,32,34,35,36,40,42,43,44,47,48].includes(i) ? "filled" : ""}`} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="tools" className="features">
-        <h2>Free Tools</h2>
+      <section id="features" className="features">
+        <h2>{t.features.title}</h2>
         <div className="features-grid">
-          <a href="/qr" className="feature-card tool-card">
-            <div className="feature-icon">📱</div>
-            <h3>QR Code Generator</h3>
-            <p>Generate customizable QR codes instantly. Download as PNG or SVG. No sign-up required.</p>
-          </a>
+          <div className="feature-card">
+            <div className="feature-icon">⚡</div>
+            <h3>{t.features.fast.title}</h3>
+            <p>{t.features.fast.desc}</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">🔒</div>
+            <h3>{t.features.secure.title}</h3>
+            <p>{t.features.secure.desc}</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">📈</div>
+            <h3>{t.features.scale.title}</h3>
+            <p>{t.features.scale.desc}</p>
+          </div>
         </div>
       </section>
 
       <section id="about" className="about">
-        <h2>About Us</h2>
-        <p>
-          We're a team of infrastructure engineers passionate about making cloud-native
-          technology accessible to everyone. From bare-metal homelab setups to production
-          Kubernetes clusters, we build tools that simplify the complex.
-        </p>
+        <h2>{t.about.title}</h2>
+        <p>{t.about.desc}</p>
       </section>
 
       <section id="contact" className="contact">
-        <h2>Stay in the Loop</h2>
+        <h2>{t.contact.title}</h2>
         {submitted ? (
-          <p className="success-msg">Thanks! We'll be in touch.</p>
+          <p className="success-msg">{t.contact.success}</p>
         ) : (
           <form onSubmit={handleSubmit} className="contact-form">
             <input
               type="email"
-              placeholder="your@email.com"
+              placeholder={t.contact.placeholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="submit" className="btn btn-primary">Subscribe</button>
+            <button type="submit" className="btn btn-primary">{t.contact.submit}</button>
           </form>
         )}
       </section>
 
       <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Overnit. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Overnit. {t.footer}</p>
       </footer>
     </div>
   );

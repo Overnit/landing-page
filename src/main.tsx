@@ -1,5 +1,6 @@
 import { StrictMode, useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
+import { LangProvider } from "./LangContext";
 import App from "./App.tsx";
 import QrGenerator from "./QrGenerator.tsx";
 
@@ -18,6 +19,8 @@ function Router() {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router />
+    <LangProvider>
+      <Router />
+    </LangProvider>
   </StrictMode>
 );
