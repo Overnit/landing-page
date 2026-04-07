@@ -29,4 +29,18 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: wrangler deploy --override-existing-dns-record
+        run: |
+          # Delete existing DNS records for overnit.com and www.overnit.com that conflict with custom domains
+          ZONE_ID="${{ secrets.CLOUDFLARE_ZONE_ID }}"
+          for hostname in "overnit.com" "www.overnit.com"; do
+            RECORDS=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records?name=${hostname}" \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -H "Content-Type: application/json" | jq -r '.result[].id // empty')
+            for id in $RECORDS; do
+              echo "Deleting DNS record ${id} for ${hostname}"
+              curl -s -X DELETE "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records/${id}" \
+                -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+                -H "Content-Type: application/json"
+            done
+          done
+          wrangler deploy
