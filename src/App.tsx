@@ -17,6 +17,7 @@ function App() {
         <div className="nav-brand">Overnit</div>
         <div className="nav-links">
           <a href="#features">Features</a>
+          <a href="#tools">Tools</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </div>
@@ -54,6 +55,17 @@ function App() {
             <h3>Auto Scaling</h3>
             <p>Kubernetes-native workloads that scale seamlessly with your demand.</p>
           </div>
+        </div>
+      </section>
+
+      <section id="tools" className="features">
+        <h2>Free Tools</h2>
+        <div className="features-grid">
+          <a href="/qr" className="feature-card tool-card">
+            <div className="feature-icon">📱</div>
+            <h3>QR Code Generator</h3>
+            <p>Generate customizable QR codes instantly. Download as PNG or SVG. No sign-up required.</p>
+          </a>
         </div>
       </section>
 

@@ -8,7 +8,7 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    // Let assets binding handle static files
+    // SPA: serve index.html for client-side routes
     return new Response(null, { status: 404 });
   },
 } satisfies ExportedHandler;
