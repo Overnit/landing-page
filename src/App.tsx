@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useLang } from "./LangContext";
 import { LangSwitcher } from "./LangSwitcher";
 import QRCode from "qrcode";
