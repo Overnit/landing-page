@@ -187,8 +187,26 @@ body {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--text-secondary);
   max-width: 580px;
-  margin: 0 auto;
+  margin: 0 auto 2.5rem;
   line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
+}
+.btn-ghost:hover {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  border-color: rgba(255,255,255,0.2);
 }
 
 /* ========================
@@ -390,6 +408,106 @@ body {
 }
 
 /* ========================
+   QR GENERATOR
+======================== */
+.qr-builder {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.qr-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.qr-textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+.qr-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.qr-option-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.color-picker {
+  width: 40px;
+  height: 32px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.size-slider {
+  flex: 1;
+  accent-color: var(--brand-primary);
+  cursor: pointer;
+}
+
+.qr-preview-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  min-width: 160px;
+}
+
+.qr-preview-img {
+  border-radius: var(--radius-md);
+  max-width: 200px;
+  width: 100%;
+  display: block;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+.btn-download {
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+}
+
+.qr-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 160px;
+  height: 160px;
+  border: 2px dashed var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+.qr-placeholder-icon {
+  font-size: 3rem;
+  opacity: 0.3;
+}
+
+.qr-placeholder p {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* ========================
    FEATURES SECTION
 ======================== */
 .features {
@@ -484,6 +602,8 @@ body {
   .nav-links { display: none; }
 
   .hero { margin: 2rem auto 3rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { width: 100%; max-width: 320px; }
 
   .input-group { flex-direction: column; }
   .input-group .glass-input { min-width: unset; width: 100%; }
@@ -492,9 +612,58 @@ body {
   .result-url-box { flex-direction: column; align-items: flex-start; }
   .btn-icon { width: 100%; justify-content: center; }
 
-  .features-grid { grid-template-columns: 1fr; }
+  .qr-builder { grid-template-columns: 1fr; }
+  .qr-preview-panel { width: 100%; align-items: center; }
+  .qr-preview-img { max-width: 180px; }
+  .qr-placeholder { width: 100%; height: 140px; }
 
+  .features-grid { grid-template-columns: 1fr; }
   .glass-card { padding: 1.5rem; }
+}
+
+/* ========================
+   TOOLS WRAPPER
+======================== */
+.tools-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ========================
+   TOOL SECTION (shared container)
+======================== */
+.tool-section {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tool-header { display: flex; flex-direction: column; gap: 0.5rem; }
+.tool-header h2 { font-size: 1.5rem; font-weight: 700; }
+.tool-header p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+.tool-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.25rem 0.75rem;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--brand-accent);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 480px) {
