@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLang } from "./LangContext";
 import { LangSwitcher } from "./LangSwitcher";
 import QRCode from "qrcode";
-import "./App.css";
+import "./index.css";
 
 function App() {
   const { t } = useLang();
@@ -51,7 +51,7 @@ function App() {
   };
 
   return (
-    <div className="page dark-theme">
+    <div className="page">
       <div className="ambient-glow glow-1"></div>
       <div className="ambient-glow glow-2"></div>
       
@@ -142,7 +142,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="footer glass-footer">
+      <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Overnit. Empowering the open-source homelab community.</p>
       </footer>
     </div>
