@@ -15,9 +15,11 @@ spec:
       labels:
         app: landing-page
     spec:
+      imagePullSecrets:
+      - name: ghcr-login-secret
       containers:
       - name: landing-page
-        image: ghcr.io/Overnit/landing-page:latest
+        image: ghcr.io/overnit/landing-page:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
