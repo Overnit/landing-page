@@ -6,6 +6,7 @@ import "./index.css";
 
 /* ── QR Generator Section ── */
 function QRGenerator() {
+  const { t } = useLang();
   const [input, setInput] = useState("");
   const [qrDataUrl, setQrDataUrl] = useState("");
   const [qrColor, setQrColor] = useState("#0A0F1E");
@@ -42,9 +43,9 @@ function QRGenerator() {
     <section id="qr" className="tool-section fade-in-up delay-2">
       <div className="glass-card tool-card">
         <div className="tool-header">
-          <span className="tool-badge">Free Tool</span>
-          <h2>📷 QR Code Generator</h2>
-          <p>Type any URL or text to generate a custom QR Code instantly. No signup, no limits.</p>
+          <span className="tool-badge">{t.qrWidget.badge}</span>
+          <h2>{t.qrWidget.title}</h2>
+          <p>{t.qrWidget.desc}</p>
         </div>
 
         <div className="qr-builder">
@@ -53,12 +54,12 @@ function QRGenerator() {
               className="glass-input qr-textarea"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="https://overnit.com  (or any text)"
+              placeholder={t.qrWidget.placeholder}
               rows={3}
             />
             <div className="qr-options">
               <label className="qr-option-label">
-                <span>QR Color</span>
+                <span>{t.qrWidget.color}</span>
                 <input
                   type="color"
                   value={qrColor}
@@ -67,7 +68,7 @@ function QRGenerator() {
                 />
               </label>
               <label className="qr-option-label">
-                <span>Background</span>
+                <span>{t.qrWidget.bg}</span>
                 <input
                   type="color"
                   value={qrBg}
@@ -76,7 +77,7 @@ function QRGenerator() {
                 />
               </label>
               <label className="qr-option-label">
-                <span>Size: {size}px</span>
+                <span>{t.qrWidget.size}: {size}px</span>
                 <input
                   type="range"
                   min={128}
@@ -95,13 +96,13 @@ function QRGenerator() {
               <>
                 <img src={qrDataUrl} alt="QR Code" className="qr-preview-img" />
                 <button onClick={handleDownload} className="btn btn-primary btn-download">
-                  ⬇ Download PNG
+                  {t.qrWidget.download}
                 </button>
               </>
             ) : (
               <div className="qr-placeholder">
                 <span className="qr-placeholder-icon">▣</span>
-                <p>Your QR will appear here</p>
+                <p>{t.qrWidget.emptyHint}</p>
               </div>
             )}
           </div>
@@ -113,6 +114,7 @@ function QRGenerator() {
 
 /* ── Link Shortener Section ── */
 function LinkShortener() {
+  const { t } = useLang();
   const [urlInput, setUrlInput] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [qrCodeData, setQrCodeData] = useState("");
@@ -158,9 +160,9 @@ function LinkShortener() {
     <section id="shortener" className="tool-section fade-in-up delay-1">
       <div className="glass-card tool-card">
         <div className="tool-header">
-          <span className="tool-badge">Free Tool</span>
-          <h2>🔗 Link Shortener</h2>
-          <p>Paste a long URL to instantly create a short branded link plus a scannable QR code.</p>
+          <span className="tool-badge">{t.shortener.badge}</span>
+          <h2>{t.shortener.title}</h2>
+          <p>{t.shortener.desc}</p>
         </div>
 
         <form onSubmit={handleShorten} className="shortener-form">
@@ -169,13 +171,13 @@ function LinkShortener() {
               type="url"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
-              placeholder="https://your-very-long-url.com/some/path..."
+              placeholder={t.shortener.placeholder}
               required
               className="glass-input"
               disabled={isShortening}
             />
             <button type="submit" className="btn btn-primary" disabled={isShortening}>
-              {isShortening ? "Generating…" : "Shorten URL"}
+              {isShortening ? t.shortener.btnGenerating : t.shortener.btnGenerate}
             </button>
           </div>
           {errorMsg && <div className="error-text">{errorMsg}</div>}
@@ -188,13 +190,13 @@ function LinkShortener() {
                 {shortenedUrl}
               </a>
               <button onClick={handleCopy} className="btn-icon">
-                {copied ? "✓ Copied" : "📋 Copy"}
+                {copied ? t.shortener.copied : t.shortener.copy}
               </button>
             </div>
             {qrCodeData && (
               <div className="qr-container">
                 <img src={qrCodeData} alt="QR Code" className="qr-img" />
-                <p className="qr-hint">Scan to test</p>
+                <p className="qr-hint">{t.shortener.scanHint}</p>
               </div>
             )}
           </div>
@@ -217,8 +219,8 @@ function App() {
         <div className="nav-brand">Overnit<span className="dot">.</span></div>
         <div className="nav-right">
           <div className="nav-links">
-            <a href="#shortener">Shortener</a>
-            <a href="#qr">QR Code</a>
+            <a href="#shortener">{t.nav.shortener}</a>
+            <a href="#qr">{t.nav.qr}</a>
             <a href="#features">{t.nav.features}</a>
           </div>
           <LangSwitcher />
@@ -227,17 +229,17 @@ function App() {
 
       <main className="main-content">
         <header className="hero fade-in-up">
-          <div className="hero-badge">🚀 Now running on KubeForge Proxmox K3s</div>
+          <div className="hero-badge">{t.heroBadge}</div>
           <h1 className="hero-title">
-            Free tools for<br />
-            <span className="gradient-text">developers & creators.</span>
+            {t.heroTitle1}<br />
+            <span className="gradient-text">{t.heroTitleHighlight}</span>
           </h1>
           <p className="hero-subtitle">
-            Shorten links, generate QR codes, and ship faster — all served from a sovereign homelab.
+            {t.heroSubtitle}
           </p>
           <div className="hero-actions">
-            <a href="#shortener" className="btn btn-primary">Try Link Shortener →</a>
-            <a href="#qr" className="btn btn-ghost">Generate QR Code</a>
+            <a href="#shortener" className="btn btn-primary">{t.ctaShortener}</a>
+            <a href="#qr" className="btn btn-ghost">{t.ctaQr}</a>
           </div>
         </header>
 
@@ -247,29 +249,29 @@ function App() {
         </div>
 
         <section id="features" className="features scale-in delay-2">
-          <h2 className="section-title">Built with True Sovereign Tech</h2>
+          <h2 className="section-title">{t.featuresSection.title}</h2>
           <div className="features-grid">
             <div className="feature-card glass-card">
               <span className="feature-icon">⚡</span>
-              <h3>Lightning Fast</h3>
-              <p>Served from a K3s Cluster on bare-metal Proxmox VMs with Redis caching.</p>
+              <h3>{t.featuresSection.fastTitle}</h3>
+              <p>{t.featuresSection.fastDesc}</p>
             </div>
             <div className="feature-card glass-card">
               <span className="feature-icon">🔒</span>
-              <h3>Private by Default</h3>
-              <p>All data lives inside your own homelab. Zero third-party tracking.</p>
+              <h3>{t.featuresSection.privateTitle}</h3>
+              <p>{t.featuresSection.privateDesc}</p>
             </div>
             <div className="feature-card glass-card">
               <span className="feature-icon">📈</span>
-              <h3>Horizontally Scalable</h3>
-              <p>Kubernetes deployments auto-scale to handle any traffic spike.</p>
+              <h3>{t.featuresSection.scaleTitle}</h3>
+              <p>{t.featuresSection.scaleDesc}</p>
             </div>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Overnit · Open-source homelab infrastructure</p>
+        <p>&copy; {new Date().getFullYear()} {t.footerApp}</p>
       </footer>
     </div>
   );
